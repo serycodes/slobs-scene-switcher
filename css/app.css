@@ -1,0 +1,158 @@
+@font-face {
+    font-family: 'Socicon';
+    src:  url('../fonts/Socicon.eot?87visu');
+    src:  url('../fonts/Socicon.eot?87visu#iefix') format('embedded-opentype'),
+      url('../fonts/Socicon.woff2?87visu') format('woff2'),
+      url('../fonts/Socicon.ttf?87visu') format('truetype'),
+      url('../fonts/Socicon.woff?87visu') format('woff'),
+      url('../fonts/Socicon.svg?87visu#Socicon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  [class^="socicon-"], [class*=" socicon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'Socicon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: rgb(23, 24, 28);
+    color: rgb(217, 215, 210);
+    min-height: 100%;
+    margin: "0";
+    font-family: "Courier New", monospace;
+    font-size: 16px;
+}
+
+.streamlabs-offline img, .streamlabs-online img {
+    width: 100px;
+}
+
+#streamlabs-status, .twitch-username, .done-next {
+    margin: auto;
+    width: max-content;
+    text-align: center;
+}
+
+#help {
+    max-width: 900px;
+    margin: auto;
+    padding-top: 16px;
+}
+
+button {
+    box-shadow:inset 0px -3px 7px 0px #29bbff;
+    background:linear-gradient(to bottom, #2dabf9 5%, #0688fa 100%);
+    background-color:#2dabf9;
+    border-radius:3px;
+    border:1px solid #0b0e07;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:15px;
+    padding:9px 23px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #263666;
+}
+
+button:disabled,
+button[disabled]{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    background: #cccccc;
+    box-shadow: none;
+}
+
+.twitch-next {
+    padding-top: 35px;
+}
+
+.twitch-username {
+    padding-top: 20px;
+}
+
+.technical-info {
+    padding-top: 60px;
+}
+
+div#command-group-container {
+    margin: auto;
+    width: max-content;
+}
+
+button.small {
+    font-size: 10px;
+    padding: 5px 5px;
+}
+
+.command-group, #command-group-add {
+    padding: 10px;
+}
+
+#command-group-add {
+    height:22px;
+}
+
+.command-group button, #command-group-add button {
+    margin-left: 10px;
+}
+
+a, a:visited, a:hover {
+    color: white;
+}
+
+button.small.remove_command, button.small.add_command {
+    float: right;
+    width: 50px;
+}
+
+p#overlay-url {
+    overflow-wrap: anywhere;
+    margin: 50px;
+}
+
+.footer {
+    padding-top: 50px;
+    margin: auto;
+    width: max-content;
+}
+
+ul.footer-links {
+    list-style: none;
+    display: inline-flex;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul.footer-links li {
+    padding-right: 15px;
+}
+
+ul.footer-links li:before {
+    padding-right: 8px;
+}
+.socicon-github:before {
+    content: "\e032";
+}
+
+.socicon-twitch:before {
+    content: "\e08c";
+    color: #6441a5;
+}
+
+.socicon-twitter:before {
+    content: "\e08d";
+    color: #00acee;
+}

@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="./css/app.css">
+    </head>
+    <body>
+        <div id="help">
+            <h1>Streamlabs OBS Scene Switcher</h1>
+            <p>Want to switch scenes simply by a command? Now you can!</p>
+            <p>This is a browser source that'll allow you to change scenes based on a command in chat. Simple as that!</p>
+            <div id="first">
+                <h2>1. Connnect to SLOBS</h2>
+                <p>First, we need to connect to Streamlabs OBS. If it's open and you can connect, the icon below will show the connection. If not:</p>
+                <ul>
+                    <li>Open Settings</li>
+                    <li>Click on Remote Control</li>
+                    <li>Click on the QR code (you don't need to scan it)</li>
+                    <li>Close the window</li>
+                </ul>
+                <div id="streamlabs-status">
+                    <div class="streamlabs-offline">
+                        <img src="./img/streamlabs-obs.png" /><p>Offline</p>
+                    </div>
+                    <div class="streamlabs-online" style="display: none;">
+                        <img src="./img/streamlabs-obs-online.png" /><p>Online!</p>
+                        <button onClick="slobsConnected()">Next: Connect to Twitch</button>
+                    </div>
+                </div>
+                <div class="technical-info">
+                    <h4>Technical information for the technically inclined:</h4>
+                    <p>This makes a connection from your browser using a <a href="https://github.com/sockjs/sockjs-client" target="_blank">SockJS client</a> to the SockJS server running in your Streamlabs OBS (and once added as a browser source, from your browser source to SockJS). This connection is local, running on 127.0.0.1 (localhost). This connection does not travel over the internet nor through my server. Clicking on the QR code within SLOBS settings enables this SockJS server (which is commonly used for the SLOBS Remote Control app).</p>
+                </div>
+            </div>
+            <div id="second" style="display: none;">
+                <h2>2. Connnect to Twitch</h2>
+                <p>Let's connect to Twitch! We just need your Twitch username.</p>
+                <div class="twitch-username">
+                    <label for="twitch_username">Twitch Username:</label>
+                    <input id="twitch_username" />
+                    <div class="twitch-next">
+                        <button id="twitchConnectedButton" onClick="twitchConnected()" disabled>Next: Define your commands</button>
+                    </div>
+                </div>
+                <div class="technical-info">
+                    <h4>Technical information for the technically inclined:</h4>
+                    <p>I need your username to connect to Twitch chat. The browser source you'll be using uses a small Twitch chat client (<a href="https://github.com/tmijs/tmi.js" target="_blank">tmi.js</a>) that will connect to your chat anonymously to watch for your commands. It will not reply in chat, nor show up in the viewer list.</p>
+                </div>
+            </div>
+            <div id="third" style="display: none;">
+                <h2>3. Let's make some commands!</h2>
+                <div id="command-group-container">
+                    <div id="command-group-add">
+                        <button class="small add_command">Add</button>
+                    </div>
+                </div>
+                <div class="done-next">
+                    <button id="doneButton" onClick="doneWithCommands()">Done: Get your overlay</button>
+                </div>
+                <div class="technical-info">
+                    <h4>Technical information for the technically inclined:</h4>
+                    <p>I've pulled your scenes from SLOBS and preassigned a command to them. You can edit them to your liking, or remove them. Or add more. Do what you want. :)</p>
+                </div>
+            </div>
+            <div id="fourth" style="display: none;">
+                <h2>4. We're done!</h2>
+                <p>Hi! Here's your overlay. It's probably a long URL.</p>
+                <p id="overlay-url"></p>
+                <p>Add this URL as a browser source to all the scenes you want the commands to be available from. You can leave the width and height as 800 and 600 respectively, and hide the entire overlay, as I don't show anything on screen unless there is an issue. I recommend leaving both "Shutdown source when not visible" and "Refresh browser when scene becomes active" unchecked.</p>
+                <div class="technical-info">
+                    <h4>Technical information for the technically inclined:</h4>
+                    <p>All the options you've selected have been put into an object, encoded into Base64, and put into the URL above.</p>
+                </div>
+            </div>
+            <div class="footer">
+                Find me on:
+                <ul class="footer-links">
+                    <li class="socicon-twitch"><a target="_blank" href="https://twitch.tv/serycodes">Twitch</a></li>
+                    <li class="socicon-twitter"><a target="_blank" href="https://twitter.com/serycodes">Twitter</a></li>
+                    <li class="socicon-github"><a target="_blank" href="https://github.com/serycodes">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js" integrity="sha256-KWJavOowudybFMUCd547Wvd/u8vUg/2g0uSWYU5Ae+w=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./js/app.js"></script>
+</html>
