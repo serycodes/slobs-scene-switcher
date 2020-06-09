@@ -1,4 +1,4 @@
-var scenes;
+var scenes, apiToken;
 
 // First, check Slobs status, runs on page load
 var checkSlobsStatus = function () {
@@ -16,8 +16,26 @@ var checkSlobsStatus = function () {
     });
 }
 
+// API Token, makes sure person fills out API token field
+$('input#api_token').keyup(function(e) {
+    var input = $(this);
+
+    if(( input.val() == "" || input.val() == null)) {
+        $("#slobsConnectedButton").attr("disabled","true");
+    }
+    else{
+        $("#slobsConnectedButton").removeAttr("disabled");
+    }
+
+    // might as well handle an enter keypress
+    if(e.which == 13) { 
+        slobsConnected();
+        return false;
+    }
+});
+
 // Twitch username check, makes sure person fills out Twitch username field
-$('#twitch_username').keypress(function(e) {
+$('#twitch_username').keyup(function(e) {
     var input = $(this);
 
     if(( input.val() == "" || input.val() == null)) {
@@ -93,6 +111,7 @@ var createSceneCommand = function (commandName=null, sceneId=null) {
 var createOverlayUrl = function () {
     var options = {
         tu: $("#twitch_username").val(),
+        at: apiToken,
         c: []
     }
     var rowCount = $("div.command-group").length;
@@ -111,8 +130,6 @@ var createOverlayUrl = function () {
 // Next button on slobs connected page
 var slobsConnected = function () {
     getScenes();
-    $("#first").hide();
-    $("#second").show();
 }
 
 // Next button on twitch connect page
@@ -131,11 +148,12 @@ var doneWithCommands = function () {
 
 // Handle SockJS Connection/Scenes
 var getScenes = function () {
-    var sock = new SockJS('http://localhost:59650/api');
+    apiToken = $("input#api_token").val();
+    var sock = new SockJS('http://127.0.0.1:59650/api');
     
     sock.onopen = function() {
         console.log('SockJS connection open to SLOBS');
-        sendSLOBSMessage("getInitialScenes", "getScenes", "ScenesService")
+        sendSLOBSMessage("auth", "auth", "TcpServerService", [apiToken])
     };
 
     sock.onmessage = function(e) {
@@ -144,6 +162,17 @@ var getScenes = function () {
         if(sockSLOBS.id === "getInitialScenes"){
             scenes = sockSLOBS.result;
             sock.close();
+            $("#first").hide();
+            $("#second").show();
+        }
+        if(sockSLOBS.id === "auth"){
+            if(sockSLOBS.error){
+                $("#slobs_auth_error").show()
+            }
+            else{
+                sendSLOBSMessage("getInitialScenes", "getScenes", "ScenesService")
+            }
+            
         }
     };
 

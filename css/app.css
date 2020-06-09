@@ -156,3 +156,14 @@ ul.footer-links li:before {
     content: "\e08d";
     color: #00acee;
 }
+
+button#slobsConnectedButton {
+    margin-top: 25px;
+}
+
+span#slobs_auth_error {
+    font-size: smaller;
+    color: red;
+    display: block;
+    padding-top: 15px;
+}

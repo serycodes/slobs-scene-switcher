@@ -57,6 +57,7 @@ function main(){
 
         sock.onopen = function() {
             console.log('SockJS connection opened to SLOBS');
+            sendSLOBSMessage(sock, "auth", "auth", "TcpServerService", [optionsQSP.at])
             try{
                 twitchClient.connect();
             }
